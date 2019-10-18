@@ -1,4 +1,4 @@
-package java.com.ibarkalov.calculator;
+package com.ibarkalov.calculator;
 import org.springframework.stereotype.Service;
 
 @Service
