@@ -2,7 +2,7 @@ pipeline {
      
      agent any
      stages {
-	  def app
+	  
           stage("Compile") {
                steps {
                     sh "./gradlew compileJava"
@@ -43,8 +43,7 @@ pipeline {
 
 	  stage("Docker build") {
           	steps {
-			app = docker.build("ibarkalov/calculator")
-          		
+			sh "docker build -t ibarkalov/calculator ."          		
      		}
 	  }
      }
