@@ -1,4 +1,5 @@
 pipeline {
+     def app
      agent any
      stages {
           stage("Compile") {
@@ -41,7 +42,8 @@ pipeline {
 
 	  stage("Docker build") {
           	steps {
-          		sh "docker build -t ibarkalov/calculator ."
+			app = docker.build("ibarkalov/calculator")
+          		
      		}
 	  }
      }
