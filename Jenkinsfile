@@ -51,5 +51,17 @@ pipeline {
           		sh "docker run -d --rm -p 8765:8080 --name calculator ibarkalov/calculator"
      		}
 	  }
+	  
+	  stage("Acceptance test") {
+     		steps {
+          		sleep 60
+          		sh "./acceptance_test.sh"
+     		}
+	  }
+     }
+     post {
+     	always {
+        	sh "docker stop calculator"
+     	}
      }
 }
