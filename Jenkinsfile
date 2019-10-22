@@ -41,40 +41,43 @@ pipeline {
           		sh "./gradlew build"
      		}
 	  }
-	  # stage("Docker build") {
-          #	steps {
-	  #		sh "docker build -t ibarkalov/calculator ."          		
-     	  #	}
-	  # }
-	  # stage("Deploy to staging") {
-     	  # 	steps {
-          #  		sh "docker run -d --rm -p 8765:8080 --name calculator ibarkalov/calculator"
-     	  # 	}
-	  # }
+/*
+	  stage("Docker build") {
+         	steps {
+	  		sh "docker build -t ibarkalov/calculator ."          		
+     	  	}
+	  }
 	  
-	  # stage("Acceptance test") {
-     	  #	steps {
-          # 		sleep 3
-          #		sh "./acceptance_test.sh"
-     	  #	}
-	  # }
-	  # stage("Deploy to staging using docker-compose") {
-    	  #	steps {
-          #		sh "docker-compose up -d"
-    	  #	}
-	  # }
-	  # stage("Acceptance test using docker-compose") {
-          #     steps {
-          #            sleep 3
-          #           sh "./acceptance_test.sh"
-          #  }
-          #}
-
+	  stage("Deploy to staging") {
+     	   	steps {
+            		sh "docker run -d --rm -p 8765:8080 --name calculator ibarkalov/calculator"
+     	   	}
+	  }
+	  
+	  stage("Acceptance test") {
+     	  	steps {
+           		sleep 3
+          		sh "./acceptance_test.sh"
+     	  	}
+	  }
+	  
+	  stage("Deploy to staging using docker-compose") {
+    	  	steps {
+          		sh "docker-compose up -d"
+    	  	}
+	  }
+	  stage("Acceptance test using docker-compose") {
+               steps {
+                      sleep 3
+                     sh "./acceptance_test.sh"
+            }
+          }
+*/
 	  stage("Acceptance test") {
     		steps {
         		sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml build test"
 		        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p acceptance up -d"
-      		#	sh 'test $(docker wait acceptance_test_1) -eq 0'
+      			sh 'test $(docker wait acceptance_test_1) -eq 0'
     		}
 	  }
 
