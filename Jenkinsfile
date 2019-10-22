@@ -54,14 +54,28 @@ pipeline {
 	  
 	  stage("Acceptance test") {
      		steps {
-          		sleep 60
+          		sleep 3
           		sh "./acceptance_test.sh"
      		}
 	  }
+	  stage("Deploy to staging using docker-compose") {
+    		steps {
+        		sh "docker-compose up -d"
+    		}
+	  }
+	  stage("Acceptance test using docker-compose") {
+                steps {
+                        sleep 3
+                        sh "./acceptance_test.sh"
+                }
+          }
+
+
      }
      post {
      	always {
         	sh "docker stop calculator"
+		sh "docker-compose down"
      	}
      }
 }
