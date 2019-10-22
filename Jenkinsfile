@@ -41,23 +41,23 @@ pipeline {
      		}
 	  }
 
-	  stage("Docker build") {
-          	steps {
-			sh "docker build -t ibarkalov/calculator ."          		
-     		}
-	  }
-	  stage("Deploy to staging") {
-     		steps {
-          		sh "docker run -d --rm -p 8765:8080 --name calculator ibarkalov/calculator"
-     		}
-	  }
+	  #stage("Docker build") {
+          #	steps {
+	#		sh "docker build -t ibarkalov/calculator ."          		
+     	#	}
+	 # }
+	  #stage("Deploy to staging") {
+     		#steps {
+          	#	sh "docker run -d --rm -p 8765:8080 --name calculator ibarkalov/calculator"
+     		#}
+	  #}
 	  
-	  stage("Acceptance test") {
-     		steps {
-          		sleep 3
-          		sh "./acceptance_test.sh"
-     		}
-	  }
+	  #stage("Acceptance test") {
+     	#	steps {
+         # 		sleep 3
+          #		sh "./acceptance_test.sh"
+     	#	}
+	 # }
 	  stage("Deploy to staging using docker-compose") {
     		steps {
         		sh "docker-compose up -d"
@@ -74,7 +74,7 @@ pipeline {
      }
      post {
      	always {
-        	sh "docker stop calculator"
+        #	sh "docker stop calculator"
 		sh "docker-compose down"
      	}
      }
