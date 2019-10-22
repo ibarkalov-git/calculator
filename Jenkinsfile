@@ -41,18 +41,18 @@ pipeline {
      		}
 	  }
 
-	  #stage("Docker build") {
+	  # stage("Docker build") {
           #	steps {
 	#		sh "docker build -t ibarkalov/calculator ."          		
      	#	}
 	 # }
-	  #stage("Deploy to staging") {
+	  # stage("Deploy to staging") {
      		#steps {
           	#	sh "docker run -d --rm -p 8765:8080 --name calculator ibarkalov/calculator"
      		#}
-	  #}
+	  # }
 	  
-	  #stage("Acceptance test") {
+	  # stage("Acceptance test") {
      	#	steps {
          # 		sleep 3
           #		sh "./acceptance_test.sh"
@@ -63,7 +63,7 @@ pipeline {
         #		sh "docker-compose up -d"
     	#	}
 	 # }
-	  #stage("Acceptance test using docker-compose") {
+	  # stage("Acceptance test using docker-compose") {
            #     steps {
             #            sleep 3
              #           sh "./acceptance_test.sh"
