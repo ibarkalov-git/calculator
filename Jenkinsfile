@@ -58,24 +58,33 @@ pipeline {
           #		sh "./acceptance_test.sh"
      	#	}
 	 # }
-	  stage("Deploy to staging using docker-compose") {
-    		steps {
-        		sh "docker-compose up -d"
-    		}
-	  }
-	  stage("Acceptance test using docker-compose") {
-                steps {
-                        sleep 3
-                        sh "./acceptance_test.sh"
-                }
-          }
+	 # stage("Deploy to staging using docker-compose") {
+    	#	steps {
+        #		sh "docker-compose up -d"
+    	#	}
+	 # }
+	  #stage("Acceptance test using docker-compose") {
+           #     steps {
+            #            sleep 3
+             #           sh "./acceptance_test.sh"
+              #  }
+          #}
+
+stage("Acceptance test") {
+    steps {
+        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml build test"
+        sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p acceptance up -d"
+        sh 'test $(docker wait acceptance_test_1) -eq 0'
+    }
+}
 
 
      }
      post {
      	always {
         #	sh "docker stop calculator"
-		sh "docker-compose down"
+	#	sh "docker-compose down"
+sh "docker-compose -f docker-compose.yml -f acceptance/docker-compose-acceptance.yml -p acceptance down"
      	}
      }
 }
