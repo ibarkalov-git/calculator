@@ -21,16 +21,16 @@ dependencies {
 	}
 }
 
-test {
-	useJUnitPlatform()
-}
+//test {
+//	useJUnitPlatform()
+//}
 
-jacocoTestCoverageVerification {
-     violationRules {
-          rule {
-               limit {
-                    minimum = 0.2
-               }
-          }
-     }
-}
+//jacocoTestCoverageVerification {
+//     violationRules {
+//          rule {
+//               limit {
+//                    minimum = 0.2
+//               }
+//          }
+//     }
+//}
